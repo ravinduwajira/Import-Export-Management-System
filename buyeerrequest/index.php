@@ -39,36 +39,36 @@
 
                     while ($row = $brequest->fetch_assoc()):
                     ?>
-                    <div class="col-lg-4 col-md-6 col-sm-12 product-item">
-                        <a href="./?page=products/view_product&id=<?= $row['id'] ?>"
-                            class="card shadow rounded-0 text-reset text-decoration-none">
-                            <div class="product-img-holder position-relative">
-                                <img src="<?= validate_image($row['image_path']) ?>" alt="Product-image"
-                                    class="img-top product-img bg-gradient-gray">
+               
+               <div class="col-md-12 mb-3">
+                        <div class="card-body border-top border-gray">
+                            <h5 class="card-title text-truncate w-100"><?= $row['requestName'] ?></h5>
+                            <div class="d-flex w-100">
+                                <div class="col-auto px-0"><small class="text-muted">Buyer Name: </small></div>
+                                <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                    <p class="text-truncate m-0"><small class="text-muted"><?= $row['buyerName'] ?></small></p>
+                                </div>
                             </div>
-                            <div class="card-body border-top border-gray">
-                                <h5 class="card-title text-truncate w-100"><?= $row['requestName'] ?></h5>
-                                <div class="d-flex w-100">
-                                    <div class="col-auto px-0"><small class="text-muted">Buyer Name: </small></div>
-                                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                                        <p class="text-truncate m-0"><small class="text-muted"><?= $row['buyerName'] ?></small></p>
-                                    </div>
+                            <div class="d-flex">
+                                <div class="col-auto px-0"><small class="text-muted">Importer ID: </small></div>
+                                <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                    <p class="text-truncate m-0"><small class="text-muted"><?= $row['importer_id'] ?></small></p>
                                 </div>
-                                <div class="d-flex">
-                                    <div class="col-auto px-0"><small class="text-muted">Contact No: </small></div>
-                                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                                        <p class="text-truncate m-0"><small class="text-muted"><?= $row['contactNo'] ?></small></p>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-auto px-0"><small class="text-muted">Expected Price: Rs. </small></div>
-                                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                                        <p class="m-0 pl-3"><small class="text-primary"><?= format_num($row['expectedPrice']) ?></small></p>
-                                    </div>
-                                </div>
-                                <p class="card-text truncate-3 w-100"><?= strip_tags(html_entity_decode($row['description'])) ?></p>
                             </div>
-                        </a>
+                            <div class="d-flex">
+                                <div class="col-auto px-0"><small class="text-muted">Contact No: </small></div>
+                                <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                    <p class="text-truncate m-0"><small class="text-muted"><?= $row['contactNo'] ?></small></p>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-auto px-0"><small class="text-muted">Expected Price: Rs. </small></div>
+                                <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                    <p class="m-0 pl-3"><small class="text-primary"><?= format_num($row['price']) ?></small></p>
+                                </div>
+                            </div>
+                            <p class="card-text truncate-3 w-100">Request Description: <?= strip_tags(html_entity_decode($row['description'])) ?></p>
+                        </div>
                     </div>
                     <?php endwhile; ?>
                 </div>
@@ -81,18 +81,6 @@
 $(document).ready(function(){
     $('#create_new').click(function(){
         uni_modal('Add New Buyer Request', "buyeerrequest/manage_product.php", 'large');
-    });
-
-    $('.view_data').click(function(){
-        uni_modal('View Buyer Request Details', "buyeerrequest/view_product.php?id=" + $(this).attr('data-id'), 'large');
-    });
-
-    $('.edit_data').click(function(){
-        uni_modal('Update Buyer Request', "buyeerrequest/manage_product.php?id=" + $(this).attr('data-id'), 'large');
-    });
-
-    $('.delete_data').click(function(){
-        _conf("Are you sure to delete this Buyer Request permanently?", "delete_product", [$(this).attr('data-id')]);
     });
 
     $('table th,table td').addClass('align-middle px-2 py-1');
